@@ -164,6 +164,7 @@ export default {
       }
       return sum;
     },
+
     getWWFromDate(date = null) {
       let currentDate = date || new Date();
       let startDate = new Date(currentDate.getFullYear(), 0, 1);
@@ -175,21 +176,19 @@ export default {
         numofday: currentDate.getDay(),
       };
     },
+
     hideShowALLstatus() {
       if (!document.querySelector(".styled").checked) {
         this.hidestatus = [];
         this.allCheckBox = [];
-      }
-
-      if (document.querySelector(".styled").checked) {
+      } else {
         this.hidestatus = this.productDataBystatus.status;
         this.allCheckBox = this.productDataBystatus.status;
       }
 
       this.allCheck = !this.allCheck;
 
-      if (this.allCheck) {
-      } else {
+      if (!this.allCheck) {
         this.hidestatus = [];
         this.allCheckBox = [];
       }
