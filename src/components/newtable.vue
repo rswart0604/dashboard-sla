@@ -71,7 +71,7 @@
       </tr>
       </thead>
       <tbody>
-      <template v-for="(data, status, index) in this.$props.productDataByStatus.data">
+      <template v-for="(data, status) in this.$props.productDataByStatus.data">
         <!-- status -->
         <tr>
           <td class="width1" :rowspan="calstatusRowspan(data)">
@@ -87,7 +87,7 @@
             </td>
           </tr>
 
-          <tr v-for="(v, k) in data[cores]">
+          <tr v-for="v in data[cores]">
             <!-- product -->
             <td class="productColumn">{{ v.Product }}</td>
 

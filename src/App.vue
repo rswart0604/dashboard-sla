@@ -20,24 +20,32 @@ export default {
       let statusSet = new Set();
 
       // get it to be less than or equal to 100 at whatever page index the user wants
-      let slicedData = data.slice((this.page-1)*100, (this.page)*100);
+      // let slicedData = data;
+      // let slicedData = data.slice((this.page-1)*100, (this.page)*100);
 
-      slicedData.forEach((element) => {
+      let newData = [];
+      // get rid of stuff that we want to hide by status
+      data.forEach((element) => {
+        let status = element.Status;
+        if (!this.hidestatus.includes(status)) { // Hide by status
+          newData.push(element);
+        }
+      });
+
+      // now go through that new data
+      newData.forEach((element) => {
         let status = element.Status;
         let cores = element.Cores;
 
-        if (this.hidestatus.includes(status)) return; // Hide by status
         if (!tmp[status]) tmp[status] = {};
         if (!tmp[status][cores]) tmp[status][cores] = [];
 
         tmp[status][cores].push(element);
       });
 
-      // we still want to see all the statuses up at the top
+      // we still want to see all the statuses up at the top though
       data.forEach((element) => {
         let status = element.Status;
-
-        // push status to set
         statusSet.add(status);
       });
 
@@ -58,7 +66,7 @@ export default {
     },
     receivePageNumber(newPageNum) {
       this.page = newPageNum;
-    }
+    },
   },
   data: () => {
     return {
