@@ -2,14 +2,16 @@
 import data from "./assets/data.json";
 import TheTable from "./components/newtable.vue";
 import TheCheckbox from "./components/checkboxes.vue";
+import ThePageSelector from "./components/pageselector.vue";
 import {ref} from "vue";
 
 export default {
-  components: {TheTable, TheCheckbox},
+  components: {TheTable, TheCheckbox, ThePageSelector},
   created() {
     this.UIData = data;
     this.hidestatus = [];
-    this.maxPages = Math.floor(data.length / 100) + 1;
+    this.maxPages = Math.ceil(data.length / 100);
+    this.page = 1;
   },
   computed: {
     productDataBystatus() {
@@ -18,7 +20,7 @@ export default {
       let statusSet = new Set();
 
       // get it to be less than or equal to 100 at whatever page index the user wants
-      let slicedData = data.slice(this.page*100, (this.page+1)*100);
+      let slicedData = data.slice((this.page-1)*100, (this.page)*100);
 
       slicedData.forEach((element) => {
         let status = element.Status;
@@ -53,6 +55,9 @@ export default {
   methods: {
     receiveHideStatus(newHideStatusList) {
       this.hidestatus = newHideStatusList;
+    },
+    receivePageNumber(newPageNum) {
+      this.page = newPageNum;
     }
   },
   data: () => {
@@ -60,7 +65,7 @@ export default {
       hidestatus: [],
       UIData: [],
       maxPages: 0,
-      page: ref(3),
+      page: ref(1),
     }
   },
   setup() {}
@@ -71,6 +76,7 @@ export default {
 <template>
   <div id="app">
     <TheCheckbox :productDataByStatus="productDataBystatus" @hide-status="receiveHideStatus"/>
+    <ThePageSelector :maxPages="maxPages" @new-page="receivePageNumber"/>
     <TheTable :productDataByStatus="productDataBystatus"/>
   </div>
 </template>
