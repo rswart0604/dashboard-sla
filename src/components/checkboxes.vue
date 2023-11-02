@@ -17,10 +17,13 @@ export default {
       if (!document.querySelector(".styled").checked) {
         this.hideStatusList = [];
         this.allCheckBox = [];
-      } else {
-        this.hideStatusList = this.productDataBystatus.status;
-        this.allCheckBox = this.productDataBystatus.status;
       }
+
+      if (document.querySelector(".styled").checked) {
+        this.hideStatusList = this.productDataByStatus.status;
+        this.allCheckBox = this.productDataByStatus.status;
+      }
+
 
       this.allCheck = !this.allCheck;
 
@@ -28,15 +31,16 @@ export default {
         this.hideStatusList = [];
         this.allCheckBox = [];
       }
+      this.tableHideStatus();
     },
 
     // send our hideStatusList to table.vue
-    hideStatusHandler() {
-      this.$emit('hideStatus', this.hideStatusList);
+    tableHideStatus() {
+      this.$emit('hide-status', this.hideStatusList);
     }
   },
+
   setup(props) {
-    console.log(props)
   }
 }
 </script>
@@ -64,6 +68,7 @@ export default {
             type="checkbox"
             class="styled"
             :value="status"
+            @change="tableHideStatus"
             v-model="hideStatusList"
         />
         <label :for="`${status}`">
@@ -76,4 +81,12 @@ export default {
 
 <style scoped>
 
+.checkbox {
+  list-style: none;
+  display: flex;
+}
+
+.checkbox label {
+  margin-left: 10px;
+}
 </style>

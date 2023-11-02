@@ -181,7 +181,9 @@ export default {
       if (!document.querySelector(".styled").checked) {
         this.hidestatus = [];
         this.allCheckBox = [];
-      } else {
+      }
+
+      if (document.querySelector(".styled").checked) {
         this.hidestatus = this.productDataBystatus.status;
         this.allCheckBox = this.productDataBystatus.status;
       }

@@ -7,6 +7,7 @@ export default {
   components: {TheTable, TheCheckbox},
   mounted() {
     this.UIData = data;
+    this.hidestatus = [];
   },
   computed: {
     productDataBystatus() {
@@ -39,6 +40,11 @@ export default {
       };
     },
   },
+  methods: {
+    receiveHideStatus(newHideStatusList) {
+      this.hidestatus = newHideStatusList;
+    }
+  },
   data: () => {
     return {
       hidestatus: [],
@@ -52,7 +58,7 @@ export default {
 
 <template>
   <div id="app">
-    <TheCheckbox :productDataByStatus="productDataBystatus"/>
+    <TheCheckbox :productDataByStatus="productDataBystatus" @hide-status="receiveHideStatus"/>
     <TheTable :productDataByStatus="productDataBystatus"/>
   </div>
 </template>
