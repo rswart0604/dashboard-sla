@@ -42,7 +42,7 @@
       },
     },
     setup(props) {
-      console.log(props)
+      // console.log(props)
     }
   }
 
