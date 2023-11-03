@@ -1,5 +1,8 @@
 <script>
+  import {ref} from "vue";
+
   export default {
+
     props: {
       maxPages: Number,
     },
@@ -13,6 +16,10 @@
     methods: {
       sendPageNum() {
         this.$emit('new-page', this.currentPage);
+      },
+      resetPageNum() {
+        this.currentPage = 1;
+        this.sendPageNum();
       }
     }
 

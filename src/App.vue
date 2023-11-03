@@ -19,10 +19,6 @@ export default {
       let tmp = {};
       let statusSet = new Set();
 
-      // get it to be less than or equal to 100 at whatever page index the user wants
-      // let slicedData = data;
-      // let slicedData = data.slice((this.page-1)*100, (this.page)*100);
-
       let newData = [];
       // get rid of stuff that we want to hide by status
       data.forEach((element) => {
@@ -32,8 +28,15 @@ export default {
         }
       });
 
+      // now that we've hidden stuff, change max page number
+      this.maxPages = Math.ceil(newData.length / 100);
+
+      // splice it according to our needs
+      let slicedData = newData.slice((this.page-1)*100, (this.page)*100);
+
+
       // now go through that new data
-      newData.forEach((element) => {
+      slicedData.forEach((element) => {
         let status = element.Status;
         let cores = element.Cores;
 
@@ -63,6 +66,7 @@ export default {
   methods: {
     receiveHideStatus(newHideStatusList) {
       this.hidestatus = newHideStatusList;
+      this.$refs.pageSelector.resetPageNum();
     },
     receivePageNumber(newPageNum) {
       this.page = newPageNum;
@@ -72,19 +76,18 @@ export default {
     return {
       hidestatus: [],
       UIData: [],
-      maxPages: 0,
+      maxPages: ref(0),
       page: ref(1),
     }
   },
   setup() {}
 }
-
 </script>
 
 <template>
   <div id="app">
     <TheCheckbox :productDataByStatus="productDataBystatus" @hide-status="receiveHideStatus"/>
-    <ThePageSelector :maxPages="maxPages" @new-page="receivePageNumber"/>
+    <ThePageSelector :maxPages="maxPages" @new-page="receivePageNumber" ref="pageSelector"/>
     <TheTable :productDataByStatus="productDataBystatus"/>
   </div>
 </template>
