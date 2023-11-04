@@ -7,6 +7,9 @@
     data: () => {
       return {
         wwInfo: {},
+        colors: ["rgb(169, 212, 199)", "rgb(237, 226, 214)", "rgb(182, 197, 219)", "rgb(250, 205, 205)",
+                 "rgb(224, 187, 228)", "rgb(255, 223, 211)", "rgb(181, 207, 209)", "rgb(217, 228, 230)"],
+        statusToColors: {}
       }
     },
 
@@ -40,6 +43,14 @@
         }
         return sum;
       },
+
+      getRowStyle(status) {
+        if (!(status in this.statusToColors)) {
+          this.statusToColors[status] = this.colors.pop();
+        }
+        return "background: " + this.statusToColors[status];
+
+      }
     },
     setup(props) {
       // console.log(props)
@@ -73,23 +84,23 @@
       <tbody>
       <template v-for="(data, status) in this.$props.productDataByStatus.data">
         <!-- status -->
-        <tr>
-          <td class="width1" :rowspan="calstatusRowspan(data)">
+        <tr :style="getRowStyle(status)">
+          <td class="width1" :rowspan="calstatusRowspan(data)" >
             {{ status }}
           </td>
         </tr>
 
         <template v-for="cores in Object.keys(data)">
           <!-- cores -->
-          <tr>
+          <tr :style="getRowStyle(status)">
             <td class="width1" :rowspan="Object.keys(data[cores]).length + 1">
               {{ cores }}
             </td>
           </tr>
 
-          <tr v-for="v in data[cores]">
+          <tr v-for="v in data[cores]" :style="getRowStyle(status)">
             <!-- product -->
-            <td class="productColumn">{{ v.Product }}</td>
+            <td class="productColumn" :style="getRowStyle(status)">{{ v.Product }}</td>
 
             <!-- Lithography -->
             <td>{{ v.Lithography }}</td>
