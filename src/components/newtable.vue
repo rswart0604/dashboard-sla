@@ -49,12 +49,9 @@
           this.statusToColors[status] = this.colors.pop();
         }
         return "background: " + this.statusToColors[status];
-
       }
     },
-    setup(props) {
-      // console.log(props)
-    }
+    setup(props) {}
   }
 
 </script>
