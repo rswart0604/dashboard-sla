@@ -3,15 +3,18 @@ import data from "./assets/data.json";
 import TheTable from "./components/newtable.vue";
 import TheCheckbox from "./components/checkboxes.vue";
 import ThePageSelector from "./components/pageselector.vue";
+import TheSearchBar from "./components/searchbar.vue"
 import {ref} from "vue";
 
 export default {
-  components: {TheTable, TheCheckbox, ThePageSelector},
+  components: {TheTable, TheCheckbox, ThePageSelector, TheSearchBar},
   created() {
     this.UIData = data;
     this.hidestatus = [];
     this.maxPages = Math.ceil(data.length / 100);
     this.page = 1;
+    this.filterCategory = "";
+    this.filterValue = "";
   },
   computed: {
     productDataBystatus() {
@@ -22,9 +25,16 @@ export default {
       let newData = [];
       // get rid of stuff that we want to hide by status
       data.forEach((element) => {
+        // console.log(element);
         let status = element.Status;
         if (!this.hidestatus.includes(status)) { // Hide by status
-          newData.push(element);
+          console.log(Object.keys(element));
+          console.log(typeof(element.Base_Freq));
+          // console.log(this.filterCategory);
+          // console.log(this.filterValue);
+          if (this.filterCategory === "" || element[this.filterCategory] === this.filterValue) {
+            newData.push(element);
+          }
         }
       });
 
@@ -71,6 +81,11 @@ export default {
     receivePageNumber(newPageNum) {
       this.page = newPageNum;
     },
+    receiveFilterInfo(filterCat, filterVal) {
+      this.filterCategory = filterCat;
+      this.filterValue = filterVal;
+      this.$refs.pageSelector.resetPageNum();
+    }
   },
   data: () => {
     return {
@@ -78,6 +93,8 @@ export default {
       UIData: [],
       maxPages: ref(0),
       page: ref(1),
+      filterCategory: ref(""),
+      filterValue: ref(""),
     }
   },
   setup() {}
@@ -88,6 +105,7 @@ export default {
   <div id="app">
     <TheCheckbox :productDataByStatus="productDataBystatus" @hide-status="receiveHideStatus"/>
     <ThePageSelector :maxPages="maxPages" @new-page="receivePageNumber" ref="pageSelector"/>
+    <TheSearchBar @new-search="receiveFilterInfo"/>
     <TheTable :productDataByStatus="productDataBystatus"/>
   </div>
 </template>
