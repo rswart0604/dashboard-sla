@@ -109,3 +109,10 @@ export default {
     <TheTable :productDataByStatus="productDataBystatus"/>
   </div>
 </template>
+
+<style>
+  @import "./assets/font.css";
+  html, body {
+    font-family: "clear-font", sans-serif;
+  }
+</style>

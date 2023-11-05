@@ -51,18 +51,21 @@ export default {
     <label class="hideLabel"> Hide: </label>
     <div class="checkbox">
       <!-- All status -->
-      <input
-          :id="this.$props.productDataByStatus.status"
-          type="checkbox"
-          class="styled"
-          :value="this.$props.productDataByStatus.status"
-          @click="hideShowALLstatus"
-          v-model="hideStatusList"
-      />
-      <label :for="this.$props.productDataByStatus.status">All statuses</label>
+      <div class="box">
+        <input
+            :id="this.$props.productDataByStatus.status"
+            type="checkbox"
+            class="styled"
+            :value="this.$props.productDataByStatus.status"
+            @click="hideShowALLstatus"
+            v-model="hideStatusList"
+        />
+        <label :for="this.$props.productDataByStatus.status">All statuses</label>
+      </div>
+
 
       <!-- Dynamic status -->
-      <div v-for="status in this.$props.productDataByStatus.status" :key="`${status}`">
+      <div class="box" v-for="status in this.$props.productDataByStatus.status" :key="`${status}`">
         <input
             :id="`${status}`"
             type="checkbox"
@@ -80,13 +83,17 @@ export default {
 </template>
 
 <style scoped>
-
 .checkbox {
-  list-style: none;
   display: flex;
 }
 
 .checkbox label {
-  margin-left: 10px;
+  margin-left: 0;
+  margin-right: 10px;
 }
+
+.box:hover {
+  background-color: #ccc;
+}
+
 </style>

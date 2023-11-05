@@ -182,28 +182,6 @@ i {
   margin-right: 4%;
 }
 
-.inputBox {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  text-align: center;
-  border: 0;
-  text-transform: uppercase !important;
-}
-
-.inputBoxOverWritten {
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  text-align: center;
-  border: 0;
-  width: 80px;
-  text-transform: uppercase !important;
-  background: none !important;
-}
 
 .overWrittenCells {
   border: 2px solid rgb(194, 1, 1);
@@ -262,54 +240,17 @@ th {
   border: 1px solid black;
 }
 
-.reference {
-  width: 1%;
-  background-color: #00b0f0;
-}
 
-.released {
-  width: 1%;
-  background-color: #7fff00;
-}
 
-.partial {
-  width: 1%;
-  background-color: #ffa500;
-}
-
-.tentative {
-  width: 1%;
-  background-color: #dcdcdc;
-}
-
-.planned {
-  width: 1%;
-  background-color: #82ffac;
-}
-
-.hideBar {
-  list-style: none;
-  display: flex;
-}
 
 .productColumn {
   width: 1%;
   background-color: white;
 }
 
-.checkbox {
-  list-style: none;
-  display: flex;
-}
 
 .checkbox label {
   margin-left: 10px;
-}
-
-.redActual {
-  width: 1%;
-  color: red;
-  background-color: #dcdcdc;
 }
 
 .width1 {
