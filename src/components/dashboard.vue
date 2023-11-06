@@ -113,11 +113,6 @@ export default {
 </template>
 
 <style scoped>
-@import "../assets/font.css";
-html, body {
-  font-family: "clear-font", sans-serif;
-}
-
 .secondRow {
   display: flex;
   gap: 20px;

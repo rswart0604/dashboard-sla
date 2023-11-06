@@ -7,3 +7,10 @@ import Dashboard from "./components/dashboard.vue";
     <Dashboard />
   </div>
 </template>
+
+<style>
+@import "./assets/font.css";
+html, body {
+  font-family: "clear-font", sans-serif;
+}
+</style>
