@@ -1,7 +1,7 @@
 <script>
 export default {
   props: {
-    productDataByStatus: Object
+    productDataByStatus: Object // get product list from dashboard.bue
   },
 
   data: function() {
@@ -12,7 +12,7 @@ export default {
   },
 
   methods: {
-    // we clicked "hide all" so pls do that
+    // we clicked "hide all" so go through and check it
     hideShowALLstatus() {
       if (!document.querySelector(".styled").checked) {
         this.hideStatusList = [];
@@ -23,7 +23,6 @@ export default {
         this.hideStatusList = this.productDataByStatus.status;
         this.allCheckBox = this.productDataByStatus.status;
       }
-
 
       this.allCheck = !this.allCheck;
 

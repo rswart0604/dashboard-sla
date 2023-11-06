@@ -1,14 +1,14 @@
 <script>
   export default {
     props: {},
-    data: () => {
+    data: () => { //
       return {
         search_value: ""
       }
     },
     emits: ["new-search"],
     methods: {
-      empty() {
+      empty() { // if the user clears it, don't make them hit enter to clear filters
         if (this.search_value === "") {
           this.searchEntered();
         }
@@ -16,18 +16,17 @@
       searchEntered() {
         // some formatting for search value
         const searchString = this.search_value;
-        // search on status,
+        // search on status, cores, lithography, threads, etc
         if (searchString.startsWith("Status:")) {
           this.$emit("new-search", "Status", searchString.substring(7).trim());
         }
         else if (searchString.startsWith("Cores:")) {
           this.$emit("new-search", "Cores", Number(searchString.substring(6).trim()));
         }
-        else if (searchString.startsWith("Product:")) {
-          this.$emit("new-search", "Product", searchString.substring(8).trim());
-        }
         else if (searchString.startsWith("Lithography:")) {
           this.$emit("new-search", "Lithography", Number(searchString.substring(12).trim()));
+        } else if (searchString.startsWith("Product:")) {
+          this.$emit("new-search", "Product", searchString.substring(8).trim());
         }
         else if (searchString.startsWith("Threads:")) {
           this.$emit("new-search", "Threads", Number(searchString.substring(8).trim()));
@@ -37,7 +36,9 @@
         }
         else if (searchString.startsWith("Max Turbo Freq:")) {
           this.$emit("new-search", "Max_Turbo_Freq", Number(searchString.substring(15).trim()));
-        } else {
+        } else if (searchString !== "") { // if we have something but don't know what it is, assume it's product
+          this.$emit("new-search", "Product", searchString.trim());
+        } else { // if it's nothing, clear it
           this.$emit("new-search", "", "");
         }
       }
