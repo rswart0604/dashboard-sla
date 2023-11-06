@@ -46,18 +46,23 @@
 </script>
 
 <template>
-  <input
-      v-model="search_value"
-      placeholder="Search"
-      @input="empty"
-  >
-  <input
-      type="button"
-      @click="searchEntered"
-      value="Enter"
-  >
+  <div>
+    <input
+        v-model="search_value"
+        placeholder="Search"
+        @input="empty"
+    >
+    <input
+        class="button"
+        type="button"
+        @click="searchEntered"
+        value="Enter"
+    >
+  </div>
 </template>
 
 <style scoped>
-
+.button {
+  background-color: #b5cfd1;
+}
 </style>

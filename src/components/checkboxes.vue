@@ -96,4 +96,8 @@ export default {
   background-color: #ccc;
 }
 
+.hideBar {
+  background-color: #9ef5ff;
+}
+
 </style>

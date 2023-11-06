@@ -102,10 +102,15 @@ export default {
 </script>
 
 <template>
-  <div id="app">
-    <TheCheckbox :productDataByStatus="productDataBystatus" @hide-status="receiveHideStatus"/>
-    <ThePageSelector :maxPages="maxPages" @new-page="receivePageNumber" ref="pageSelector"/>
-    <TheSearchBar @new-search="receiveFilterInfo"/>
+  <div class="whole" id="app">
+    <div class="header">
+      <TheCheckbox class="checkboxComponent" :productDataByStatus="productDataBystatus" @hide-status="receiveHideStatus"/>
+      <div class="secondRow">
+        <ThePageSelector :maxPages="maxPages" @new-page="receivePageNumber" ref="pageSelector"/>
+        <TheSearchBar @new-search="receiveFilterInfo"/>
+      </div>
+
+    </div>
     <TheTable :productDataByStatus="productDataBystatus"/>
   </div>
 </template>
@@ -115,4 +120,21 @@ export default {
   html, body {
     font-family: "clear-font", sans-serif;
   }
+
+  .secondRow {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+
+  }
+
+  .checkboxComponent {
+    margin-bottom: 5px;
+  }
+
+  .header {
+    background-color: #9ef5ff;
+    border: 10px solid #9ef5ff;
+  }
+
 </style>

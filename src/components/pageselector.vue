@@ -37,8 +37,9 @@
 </script>
 
 <template>
-  <div>
+  <div class="selector">
     <input
+        class="left-button"
         type="button"
         @click="decreasePageNum"
         value="<"
@@ -52,6 +53,7 @@
         @change="sendPageNum"
     >
     <input
+        class="right-button"
         type="button"
         @click="increasePageNum"
         value=">"
